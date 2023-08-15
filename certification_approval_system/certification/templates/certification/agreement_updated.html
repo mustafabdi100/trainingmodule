@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if message %}
+  <p>{{ message }}</p> 
+{% endif %}
+
+<a href="{% url 'hr_dashboard' %}">Back to Dashboard</a>
+
+{% endblock %}

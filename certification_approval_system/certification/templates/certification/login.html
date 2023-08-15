@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="main-body">
+        <div class="row login_cont bg-white">
+            <div class="col-md-8 m-auto shadow-lg">
+                <div class="row">
+                    <div class="col-md-7 bg-white p-5 pt-5 pb-5">
+                        <h3 class="font_light mb-4">Sign in</h3>
+                        {% if messages %}
+                            <ul class="messages">
+                                {% for message in messages %}
+                                    <li{% if message.tags %} class="alert alert-danger"{% endif %}>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                        <form class="user mt-3" method="POST">
+                            {% csrf_token %}
+                            <div class="mb-4">
+                                <label for="username" class="label_uppercase">Username</label>
+                                <input type="text" class="form-control input_circle" name="username" id="username" required placeholder="Enter your username">
+                            </div>
+                            <div>
+                                <label for="password" class="label_uppercase">Password</label>
+                                <div class="input-group mb-4">
+                                    <input type="password" name="password" id="password" class="form-control input_circle" placeholder="**********" autocomplete="off" required>
+                                    <span title="Toggle Password visibility"
+                                          class="input-group-text password-toggler input_group_circle_right"
+                                          onclick="showPassword()" id="showpassword"><i
+                                                id="pass_togler_eye"
+                                                class="fa fa-eye-slash"></i></span>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="d-grid gap-2">
+                                    <button type="submit"
+                                            class="btn btn-lg gradient_primary_hover text-light rounded-50 p-2 login_btn">
+                                        Login <i class="fa fa-sign-in-alt"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-5 bg_gradient text-center d-flex align-items-center p-5">
+                        <div>
+                            <a class="logo"><img src="{% static 'images/konvergenzlogo.png' %}" width="100%" alt=""></a>
+                            <h3><b>Training Module</b></h3>
+                            <p>Enter your details to login</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

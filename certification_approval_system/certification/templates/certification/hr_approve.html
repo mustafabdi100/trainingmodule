@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="wrapper">
+  <!-- Sidebar -->
+  <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+    <!-- Sidebar Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'hr_dashboard' %}">
+      <div class="sidebar-brand-text mx-3">HR Dashboard</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+    <!-- Nav Item - Dashboard -->
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'hr_dashboard' %}">
+        <span>Dashboard</span>
+      </a>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
+    <!-- Heading -->
+    <div class="sidebar-heading">
+      Requests
+    </div>
+
+    <!-- Pending Requests -->
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'hr_pending_requests' %}">
+        <span>Pending</span>
+      </a>
+    </li>
+
+    <!-- Approved Requests -->
+    <li class="nav-item active">
+      <a class="nav-link" href="{% url 'hr_approved_requests' %}">
+        <span>Approved</span>
+      </a>
+    </li>
+
+    <!-- Declined Requests -->
+    <li class="nav-item">
+      <a class="nav-link" href="{% url 'hr_declined_requests' %}">
+        <span>Declined</span>
+      </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link" href="{% url 'hr_approve_request' request.id %}">Approve</a>
+          
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'hr_decline_request' request.id %}">Decline</a>
+          
+        </a>
+      </li>
+    
+    
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+  </ul>
+  
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <div class="container-fluid">
+        <div class="card shadow mb-4">
+          <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Approve Request</h6>
+          </div>
+          <div class="card-body">
+            <p class="mb-0">
+              <strong>{{ request.name }}</strong> - {{ request.department }} - {{ request.request_date }}
+            </p>
+            <form method="post" class="mt-3">
+              {% csrf_token %}
+              <div class="bg-white p-3">
+                <button class="btn btn-success btn-icon-split">
+                  <span class="icon">
+                    <i class="fas fa-check"></i>
+                  </span>
+                  <span class="text">Approve</span>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+ 
+{% endblock %}

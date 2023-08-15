@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Bond Agreement</h1>
+
+<p>
+  <strong>Employee Name:</strong> {{ employee_request.name }} 
+</p>
+
+<p>
+  <strong>Department:</strong> {{ employee_request.department }}
+</p>
+
+<p>
+  <strong>Contract Terms:</strong> <br>
+  {{ agreement.contract_terms }}
+</p>
+<form method="POST">
+
+    {% csrf_token %}
+    
+    <input type="hidden" name="agreement_id" value="{{ agreement.id }}">
+  
+    <button type="submit" name="decision" value="accept">Accept Agreement</button>
+
+<button type="submit" name="decision" value="decline">Decline Agreement</button>
+  
+  </form>
+{% endblock %}

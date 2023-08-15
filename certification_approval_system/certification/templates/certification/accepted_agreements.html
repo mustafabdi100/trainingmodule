@@ -1,0 +1,28 @@
+<!-- accepted_agreements.html -->
+
+{% extends 'base.html' %} <!-- If you have a base template, extend it here -->
+
+{% block content %}
+  <h1>Accepted Agreements</h1>
+  
+  {% if accepted_agreements %}
+    <ul>
+      {% for agreement in accepted_agreements %}
+        <li>
+          <p>
+            <strong>Employee:</strong> {{ agreement.employee_request.name }}
+          </p>
+          <p>
+            <strong>Date Accepted:</strong> {{ agreement.employee_request.request_date }}
+          </p>
+          <p>
+            <strong>Contract Terms:</strong><br>
+            {{ agreement.contract_terms }}
+          </p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No accepted agreements found.</p>
+  {% endif %}
+{% endblock %}

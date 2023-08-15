@@ -1,0 +1,28 @@
+<!-- declined_agreements.html -->
+
+{% extends 'base.html' %} 
+
+{% block content %}
+  <h1>Declined Agreements</h1>
+  
+  {% if declined_agreements %}
+    <ul>
+      {% for agreement in declined_agreements %}
+        <li>
+          <p>
+            <strong>Employee:</strong> {{ agreement.employee_request.name }}
+          </p>
+          <p>
+            <strong>Date Declined:</strong> {{ agreement.employee_request.request_date }}
+          </p>
+          <p>
+            <strong>Contract Terms:</strong><br>
+            {{ agreement.contract_terms }}
+          </p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No declined agreements found.</p>
+  {% endif %}
+{% endblock %}

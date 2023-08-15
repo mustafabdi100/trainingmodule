@@ -1,0 +1,150 @@
+
+{%load static%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approved Certification Requests</title>
+
+    <!-- Custom fonts -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
+    <!-- Custom styles -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/startbootstrap-sb-admin-2/4.1.4/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body id="page-top">
+    <header class="header">
+        <img class="logo" src="{% static 'images/logo.png' %}" alt="logo">
+    </header>
+
+    <div id="wrapper">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url 'employee_dashboard' %}">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">EMPLOYEE PORTAL</div>
+            </a>
+
+            <!-- ... Rest of the sidebar navigation ... -->
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'employee_dashboard' %}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                APPROVALS
+            </div>
+
+            <!-- Nav Item - Pending -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'pending_requests' %}">
+                    <i class="fas fa-clock"></i>
+                    <span>Pending</span></a>
+            </li>
+
+            <!-- Nav Item - Declined -->
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'declined_requests' %}">
+                    <i class="fas fa-times-circle"></i>
+                    <span>Declined</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Nav Item - Others -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOthers"
+                    aria-expanded="true" aria-controls="collapseOthers">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>OTHERS</span>
+                </a>
+                <div id="collapseOthers" class="collapse" aria-labelledby="headingOthers"
+                    data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <!-- ... Other links ... -->
+                    </div>
+                </div>
+            </li>
+        </ul>
+        
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <!-- ... Topbar navigation ... -->
+                </nav>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="card shadow mb-4">
+                                <div class="card-header py-3">
+                                    <h6 class="m-0 font-weight-bold text-primary">Approved Certification Requests</h6>
+                                </div>
+                                <div class="card-body">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Name</th>
+                                                <th>Department</th>
+                                                <th>Date</th>
+                                                <th>Reason</th>
+                                                <th>Status</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for request in approved_requests %}
+                                            <tr>
+                                                <td>{{ forloop.counter }}</td>
+                                                <td>{{ request.name }}</td>
+                                                <td>{{ request.department }}</td>
+                                                <td>{{ request.request_date }}</td>
+                                                <td>{{ request.reason_for_request }}</td>
+                                                <td>{{ request.get_status_display }}</td>
+                                            </tr>
+                                            {% if request.bondagreement %}
+<tr>
+  <td colspan="6">
+    <a href="{% url 'view_bond_agreement' request.id %}" class="btn btn-primary">View Bond Agreement</a>
+  </td>
+</tr>
+{% else %}
+<tr>
+  <td colspan="6">No agreement sent</td> 
+</tr>
+{% endif %}
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End of Main Content -->
+        </div>
+    </div>
+
+    <!-- ... Scripts ... -->
+
+</body>
+</html>
